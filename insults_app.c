@@ -50,8 +50,6 @@ void insults_app_free(InsultsApp* insults_app) {
 
     text_box_free(insults_app->insult_display);
 
-    free(insults_app->insult_string);
-
     view_dispatcher_remove_view(insults_app->view_dispatcher, InsultsViewStart);
 
     submenu_free(insults_app->start_menu);

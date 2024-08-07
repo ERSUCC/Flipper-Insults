@@ -3,10 +3,6 @@
 void insults_scene_insult_on_enter(void* context) {
     InsultsApp* insults_app = (InsultsApp*)context;
 
-    if(insults_app->insult_string) {
-        free(insults_app->insult_string);
-    }
-
     insults_app->insult_string = insults_files_get_insult(insults_app->insults_files);
 
     text_box_set_text(insults_app->insult_display, insults_app->insult_string);
@@ -22,5 +18,7 @@ bool insults_scene_insult_on_event(void* context, SceneManagerEvent event) {
 }
 
 void insults_scene_insult_on_exit(void* context) {
-    UNUSED(context);
+    InsultsApp* insults_app = (InsultsApp*)context;
+
+    free(insults_app->insult_string);
 }
