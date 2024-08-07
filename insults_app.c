@@ -16,6 +16,8 @@ InsultsApp* insults_app_alloc(void) {
     view_dispatcher_set_custom_event_callback(
         insults_app->view_dispatcher, insults_custom_event_callback);
 
+    insults_app->insults_files = insults_files_alloc();
+
     insults_app->start_menu = submenu_alloc();
 
     submenu_add_item(
@@ -24,18 +26,51 @@ InsultsApp* insults_app_alloc(void) {
         InsultsSceneStartIndexNew,
         insults_scene_start_submenu_callback,
         insults_app);
+    submenu_add_item(
+        insults_app->start_menu,
+        "View saved",
+        InsultsSceneStartIndexSaved,
+        insults_scene_start_submenu_callback,
+        insults_app);
+    submenu_add_item(
+        insults_app->start_menu,
+        "Clear saved",
+        InsultsSceneStartIndexClear,
+        insults_scene_start_submenu_callback,
+        insults_app);
 
     view_dispatcher_add_view(
         insults_app->view_dispatcher, InsultsViewStart, submenu_get_view(insults_app->start_menu));
 
-    insults_app->insult_display = text_box_alloc();
+    insults_app->insult_display = dialog_ex_alloc();
 
-    insults_app->insults_files = insults_files_alloc();
+    dialog_ex_set_context(insults_app->insult_display, insults_app);
+    dialog_ex_set_result_callback(
+        insults_app->insult_display, insults_scene_insult_dialog_callback);
+    dialog_ex_set_left_button_text(insults_app->insult_display, "Regenerate");
+    dialog_ex_set_right_button_text(insults_app->insult_display, "Save");
 
     view_dispatcher_add_view(
         insults_app->view_dispatcher,
         InsultsViewInsult,
-        text_box_get_view(insults_app->insult_display));
+        dialog_ex_get_view(insults_app->insult_display));
+
+    insults_app->saved_menu = submenu_alloc();
+
+    view_dispatcher_add_view(
+        insults_app->view_dispatcher, InsultsViewSaved, submenu_get_view(insults_app->saved_menu));
+
+    insults_app->saved_detail = dialog_ex_alloc();
+
+    dialog_ex_set_context(insults_app->saved_detail, insults_app);
+    dialog_ex_set_result_callback(
+        insults_app->saved_detail, insults_scene_saved_detail_dialog_callback);
+    dialog_ex_set_left_button_text(insults_app->saved_detail, "Delete");
+
+    view_dispatcher_add_view(
+        insults_app->view_dispatcher,
+        InsultsViewSavedDetail,
+        dialog_ex_get_view(insults_app->saved_detail));
 
     view_dispatcher_attach_to_gui(
         insults_app->view_dispatcher, insults_app->gui, ViewDispatcherTypeFullscreen);
@@ -44,15 +79,23 @@ InsultsApp* insults_app_alloc(void) {
 }
 
 void insults_app_free(InsultsApp* insults_app) {
-    insults_files_free(insults_app->insults_files);
+    view_dispatcher_remove_view(insults_app->view_dispatcher, InsultsViewSavedDetail);
+
+    dialog_ex_free(insults_app->saved_detail);
+
+    view_dispatcher_remove_view(insults_app->view_dispatcher, InsultsViewSaved);
+
+    submenu_free(insults_app->saved_menu);
 
     view_dispatcher_remove_view(insults_app->view_dispatcher, InsultsViewInsult);
 
-    text_box_free(insults_app->insult_display);
+    dialog_ex_free(insults_app->insult_display);
 
     view_dispatcher_remove_view(insults_app->view_dispatcher, InsultsViewStart);
 
     submenu_free(insults_app->start_menu);
+
+    insults_files_free(insults_app->insults_files);
 
     view_dispatcher_free(insults_app->view_dispatcher);
 

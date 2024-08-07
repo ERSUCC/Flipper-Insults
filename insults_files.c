@@ -103,3 +103,47 @@ char* insults_files_get_insult(InsultsFiles* insults_files) {
 
     return insult_cstr;
 }
+
+void insults_files_save_insult(InsultsFiles* insults_files, const char* insult) {
+    File* file = storage_file_alloc(insults_files->storage);
+
+    if(storage_file_open(
+           file, APP_DATA_PATH("saved_insults.txt"), FSAM_READ_WRITE, FSOM_OPEN_APPEND)) {
+        storage_file_write(file, insult, strlen(insult));
+        storage_file_write(file, "\n", 1);
+    }
+
+    storage_file_close(file);
+    storage_file_free(file);
+}
+
+void insults_files_delete_insult(InsultsFiles* insults_files, const unsigned int index) {
+    FileLines* lines = file_lines_alloc();
+
+    insults_files_get_lines(insults_files, APP_DATA_PATH("saved_insults.txt"), lines);
+
+    File* file = storage_file_alloc(insults_files->storage);
+
+    if(storage_file_open(
+           file, APP_DATA_PATH("saved_insults.txt"), FSAM_WRITE, FSOM_CREATE_ALWAYS)) {
+        for(unsigned int i = 0; i < lines->num_lines; i++) {
+            if(i != index) {
+                storage_file_write(file, lines->lines[i], strlen(lines->lines[i]));
+                storage_file_write(file, "\n", 1);
+            }
+        }
+    }
+
+    storage_file_close(file);
+    storage_file_free(file);
+
+    file_lines_free(lines);
+}
+
+void insults_files_clear_insults(InsultsFiles* insults_files) {
+    File* file = storage_file_alloc(insults_files->storage);
+
+    storage_file_open(file, APP_DATA_PATH("saved_insults.txt"), FSAM_WRITE, FSOM_CREATE_ALWAYS);
+    storage_file_close(file);
+    storage_file_free(file);
+}

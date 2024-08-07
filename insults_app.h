@@ -5,7 +5,7 @@
 #include <gui/scene_manager.h>
 #include <gui/view_dispatcher.h>
 #include <gui/modules/submenu.h>
-#include <gui/modules/text_box.h>
+#include <gui/modules/dialog_ex.h>
 
 #include "insults_files.h"
 #include "scenes/insults_scene.h"
@@ -13,16 +13,21 @@
 
 enum InsultsView {
     InsultsViewStart,
-    InsultsViewInsult
+    InsultsViewInsult,
+    InsultsViewSaved,
+    InsultsViewSavedDetail
 };
 
 typedef struct InsultsApp {
     Gui* gui;
     SceneManager* scene_manager;
     ViewDispatcher* view_dispatcher;
-    Submenu* start_menu;
-    TextBox* insult_display;
     InsultsFiles* insults_files;
+    Submenu* start_menu;
+    DialogEx* insult_display;
+    Submenu* saved_menu;
+    DialogEx* saved_detail;
+    FileLines* saved_lines;
     char* insult_string;
 } InsultsApp;
 

@@ -15,6 +15,18 @@ bool insults_scene_start_on_event(void* context, SceneManagerEvent event) {
 
             return true;
         }
+
+        if(event.event == InsultsSceneStartIndexSaved) {
+            scene_manager_next_scene(insults_app->scene_manager, InsultsSceneSaved);
+
+            return true;
+        }
+
+        if(event.event == InsultsSceneStartIndexClear) {
+            insults_files_clear_insults(insults_app->insults_files);
+
+            return true;
+        }
     }
 
     return false;

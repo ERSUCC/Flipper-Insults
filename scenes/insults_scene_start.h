@@ -4,9 +4,12 @@
 #include <gui/view_dispatcher.h>
 
 #include "../insults_app.h"
+#include "../insults_files.h"
 
 enum InsultsSceneStartIndex {
-    InsultsSceneStartIndexNew
+    InsultsSceneStartIndexNew,
+    InsultsSceneStartIndexSaved,
+    InsultsSceneStartIndexClear
 };
 
 void insults_scene_start_on_enter(void* context);
