@@ -1,4 +1,6 @@
+abysmal
 ape-brained
+arrogant
 asinine
 bald-faced
 blathering
@@ -8,13 +10,17 @@ cold-blooded
 compostable
 cowardly
 crepuscular
+dastardly
 deranged
 dingy
 disgusting
+dismal
 distasteful
 egg-headed
 evil
 extraterrestrial
+feckless
+fickle
 flimsy
 foolish
 foul
@@ -25,7 +31,9 @@ ill-tempered
 inappropriate
 joyless
 knock-kneed
+laggardly
 life-draining
+lugubrious
 maidenless
 manure-eating
 meandering
@@ -43,6 +51,7 @@ ostentatious
 ovine
 pathetic
 pedantic
+penniless
 phallic
 plagiarizing
 plaguing
@@ -54,6 +63,7 @@ quivering
 quixotic
 rude-mouthed
 satanic
+scrawny
 shameful
 slack-jawed
 slaughtered
@@ -69,6 +79,8 @@ unmanly
 unworthy
 vexing
 vicious
+vile
+villainous
 viscous
 waddling
 wandering
