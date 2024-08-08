@@ -11,12 +11,19 @@ bool insults_scene_start_on_event(void* context, SceneManagerEvent event) {
 
     if(event.type == SceneManagerEventTypeCustom) {
         if(event.event == InsultsSceneStartIndexNew) {
+            scene_manager_set_scene_state(
+                insults_app->scene_manager, InsultsSceneStart, event.event);
+
             scene_manager_next_scene(insults_app->scene_manager, InsultsSceneInsult);
 
             return true;
         }
 
         if(event.event == InsultsSceneStartIndexSaved) {
+            scene_manager_set_scene_state(
+                insults_app->scene_manager, InsultsSceneStart, event.event);
+            scene_manager_set_scene_state(insults_app->scene_manager, InsultsSceneSaved, 0);
+
             scene_manager_next_scene(insults_app->scene_manager, InsultsSceneSaved);
 
             return true;

@@ -4,7 +4,6 @@
 #include <gui/scene_manager.h>
 #include <gui/view_dispatcher.h>
 #include <gui/modules/dialog_ex.h>
-#include <gui/modules/submenu.h>
 #include <storage/storage.h>
 
 #include "../insults_app.h"

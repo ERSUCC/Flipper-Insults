@@ -27,7 +27,8 @@ void insults_scene_saved_detail_dialog_callback(DialogExResult result, void* con
 
     if(result == DialogExResultLeft) {
         insults_files_delete_insult(
-            insults_app->insults_files, submenu_get_selected_item(insults_app->saved_menu));
+            insults_app->insults_files,
+            scene_manager_get_scene_state(insults_app->scene_manager, InsultsSceneSaved));
 
         scene_manager_handle_back_event(insults_app->scene_manager);
     }
