@@ -1,4 +1,3 @@
-#include <furi.h>
 #include <gui/scene_manager.h>
 #include <gui/view_dispatcher.h>
 

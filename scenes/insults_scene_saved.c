@@ -17,19 +17,25 @@ void insults_scene_saved_on_enter(void* context) {
             insults_app);
     }
 
-    unsigned int index =
-        scene_manager_get_scene_state(insults_app->scene_manager, InsultsSceneSaved);
-
-    if(index >= insults_app->saved_lines->num_lines) {
-        submenu_set_selected_item(
-            insults_app->saved_menu, insults_app->saved_lines->num_lines - 1);
+    if(insults_app->saved_lines->num_lines == 0) {
+        view_dispatcher_switch_to_view(insults_app->view_dispatcher, InsultsViewSavedEmpty);
     }
 
     else {
-        submenu_set_selected_item(insults_app->saved_menu, index);
-    }
+        unsigned int index =
+            scene_manager_get_scene_state(insults_app->scene_manager, InsultsSceneSaved);
 
-    view_dispatcher_switch_to_view(insults_app->view_dispatcher, InsultsViewSaved);
+        if(index >= insults_app->saved_lines->num_lines) {
+            submenu_set_selected_item(
+                insults_app->saved_menu, insults_app->saved_lines->num_lines - 1);
+        }
+
+        else {
+            submenu_set_selected_item(insults_app->saved_menu, index);
+        }
+
+        view_dispatcher_switch_to_view(insults_app->view_dispatcher, InsultsViewSaved);
+    }
 }
 
 bool insults_scene_saved_on_event(void* context, SceneManagerEvent event) {

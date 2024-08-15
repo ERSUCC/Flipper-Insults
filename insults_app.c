@@ -72,6 +72,15 @@ InsultsApp* insults_app_alloc(void) {
         InsultsViewSavedDetail,
         dialog_ex_get_view(insults_app->saved_detail));
 
+    insults_app->saved_empty = dialog_ex_alloc();
+
+    dialog_ex_set_text(insults_app->saved_empty, "<empty>", 64, 32, AlignCenter, AlignCenter);
+
+    view_dispatcher_add_view(
+        insults_app->view_dispatcher,
+        InsultsViewSavedEmpty,
+        dialog_ex_get_view(insults_app->saved_empty));
+
     view_dispatcher_attach_to_gui(
         insults_app->view_dispatcher, insults_app->gui, ViewDispatcherTypeFullscreen);
 
@@ -79,6 +88,10 @@ InsultsApp* insults_app_alloc(void) {
 }
 
 void insults_app_free(InsultsApp* insults_app) {
+    view_dispatcher_remove_view(insults_app->view_dispatcher, InsultsViewSavedEmpty);
+
+    dialog_ex_free(insults_app->saved_empty);
+
     view_dispatcher_remove_view(insults_app->view_dispatcher, InsultsViewSavedDetail);
 
     dialog_ex_free(insults_app->saved_detail);

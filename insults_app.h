@@ -1,6 +1,7 @@
 #pragma once
 
 #include <furi/core/record.h>
+#include <gui/canvas.h>
 #include <gui/gui.h>
 #include <gui/scene_manager.h>
 #include <gui/view_dispatcher.h>
@@ -15,7 +16,8 @@ enum InsultsView {
     InsultsViewStart,
     InsultsViewInsult,
     InsultsViewSaved,
-    InsultsViewSavedDetail
+    InsultsViewSavedDetail,
+    InsultsViewSavedEmpty
 };
 
 typedef struct InsultsApp {
@@ -28,6 +30,7 @@ typedef struct InsultsApp {
     Submenu* saved_menu;
     DialogEx* saved_detail;
     FileLines* saved_lines;
+    DialogEx* saved_empty;
     char* insult_string;
 } InsultsApp;
 
