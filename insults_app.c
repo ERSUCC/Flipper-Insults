@@ -9,7 +9,6 @@ InsultsApp* insults_app_alloc(void) {
 
     insults_app->view_dispatcher = view_dispatcher_alloc();
 
-    view_dispatcher_enable_queue(insults_app->view_dispatcher);
     view_dispatcher_set_event_callback_context(insults_app->view_dispatcher, insults_app);
     view_dispatcher_set_navigation_event_callback(
         insults_app->view_dispatcher, insults_navigation_event_callback);
