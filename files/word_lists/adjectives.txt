@@ -63,6 +63,7 @@ quivering
 quixotic
 rude-mouthed
 satanic
+saucy
 scrawny
 shameful
 slack-jawed
@@ -93,3 +94,4 @@ yeasty
 yellow-bellied
 yodeling
 zany
+zealous
