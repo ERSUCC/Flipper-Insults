@@ -29,6 +29,7 @@ half-witted
 hellish
 ill-tempered
 inappropriate
+infertile
 joyless
 knock-kneed
 laggardly
@@ -73,6 +74,7 @@ soulless
 stupid
 swindling
 tactless
+tarnished
 thieving
 ululating
 uncouth

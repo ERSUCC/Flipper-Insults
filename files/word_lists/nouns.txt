@@ -5,6 +5,7 @@ boil
 blight
 boor
 braggart
+codpiece
 cow
 coward
 dung beetle
@@ -29,6 +30,7 @@ leper
 liar
 lunatic
 monster
+miscreant
 nincompoop
 nitwit
 oaf
